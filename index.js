@@ -1,6 +1,9 @@
 const { WebSocketServer } = require('ws');
 const http = require('http');
+const os = require("os");
 
+// get host name
+const hostName = os.hostname();
 
 // Spinning the http server and the WebSocket server.
 const server = http.createServer();
@@ -15,7 +18,7 @@ wss.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     console.log(`Received message: ${message}`);
-    ws.send(`Server received your message: ${message}`);
+    ws.send(`Server received your message: ${message} on host ${hostName}`);
   });
 
   ws.on('close', () => {
